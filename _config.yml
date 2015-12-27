@@ -16,8 +16,8 @@ url: http://kidloserme.github.io
 rss_url: /pages/atom.xml
 
 # gavatar头像及Favicon
-gavatar: /public/img/lone.png
-favicon: /public/img/lone.png
+gavatar: /public/img/lone.jpg
+favicon: /public/img/lone.jpg
 
 # google analytics 设置
 ga:
