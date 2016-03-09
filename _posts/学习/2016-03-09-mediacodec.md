@@ -14,11 +14,14 @@ EasyDarwinQQ群：496258327
 
 MediaCodec是Android在4.1中加入的新的API，目前也有很多文章介绍MediaCodec的用法，但是很多时候很多手机都失败，主要问题出现在调用dequeueOutputBuffer的时候总是返回-1，让你以为No buffer available !这里介绍一个开源项目[libstreaming](https://github.com/fyhertz/libstreaming),我们借助此项目中封装的一个工具类[EncoderDebugger](https://github.com/fyhertz/libstreaming/tree/master/src/net/majorkernelpanic/streaming/hw)，来初始化MediaCodec会很好的解决此问题，目前为止测试了几个手机都可以成功，包括小米华为Moto。
 看一下怎么使用的
+
 ``` java
 EncoderDebugger debugger = EncoderDebugger.debug(getApplicationContext(), width, height);
 MediaCodec mMediaCodec = MediaCodec.createByCodecName(debugger.getEncoderName());
 ```
+
 嗯，就这样。当然了，后面还是要根据需要对mMediaCodec设置其他参数的，看一下本demo中设置参数的过程吧
+
 ```java
 private void initMediaCodec() {
     int dgree = getDgree();
@@ -51,12 +54,14 @@ private void initMediaCodec() {
 
 编码之前先看一下要编码的数据怎么获取吧，这个当然是来自Camera。
 首先是创建SurfaceView用于预览视频画面，并设置回调，来监控生命周期。
+
 ```java
 surfaceView = (SurfaceView) findViewById(R.id.sv_surfaceview);
 surfaceView.getHolder().addCallback(this);
 surfaceView.getHolder().setFixedSize(getResources().getDisplayMetrics().widthPixels,
 getResources().getDisplayMetrics().heightPixels);
 ```
+
 然后是创建Camera的方法：
 
 ``` java
@@ -108,6 +113,7 @@ private int getDgree() {
 
 
 摄像头创建完毕，就是开启预览
+
 ``` java
 /**
  * 开启预览
@@ -129,6 +135,7 @@ public synchronized void startPreview() {
 ```
 
 上面就是设置了预览回调的方式，回调中将预览画面一帧一帧的返回给我们，给我们的数据就是NV21格式的,根据需要决定是否需要对数据进行旋转，旋转之后，就是转换，将NV21数据转为YUV420P格式的数据，然后就可以编码为H264数据了。
+
 ```java
 Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
     //mSpsPps用来存储sps pps数据，后面遇到关键帧（I帧），必须将spspps数据加到I帧前面
@@ -202,6 +209,7 @@ Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
     }
 };
 ```
+
 保存之后的文件easy.h264我用VLC播放器打开，截屏如下：
 ![easy264截屏](http://img.blog.csdn.net/20160309132221153)
 OK，基本上完毕了，该注意的地方都写在代码中了
