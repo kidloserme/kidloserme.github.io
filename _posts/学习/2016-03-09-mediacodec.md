@@ -211,8 +211,11 @@ Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
 ```
 
 保存之后的文件easy.h264我用VLC播放器打开，截屏如下：
+
 ![easy264截屏](http://img.blog.csdn.net/20160309132221153)
+
 OK，基本上完毕了，该注意的地方都写在代码中了
+
 需要Demo的请到这里[https://github.com/kidloserme/MediaCodecDemo](https://github.com/kidloserme/MediaCodecDemo)
 
 
