@@ -1,3 +1,11 @@
+---
+layout: post
+title: 知识点总结
+category: 学习
+tags: KIDLOSERME
+keywords: NULL
+description: 
+---
 HaspMap原理
 根据key的hashCode与Enty[]长度取模获取index来决定放入Enty中的位置，index重复则使用Entry.next在同一个index中放入多个值
 具体可看：http://www.cnblogs.com/xwdreamer/archive/2012/05/14/2499339.html 介绍
